@@ -27,6 +27,8 @@ class Validate {
       `^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{${limitMinCharsForPassword},${limitMaxCharsForPassword}}$`,
       "gi"
     );
+    this.regexNumber = new RegExp("^[0-9]*$", "gi");
+    this.regexChar = new RegExp("^[a-bA-B]*$", "gi");
     this.limitMinCharsForName = limitMinCharsForName;
     this.limitMaxCharsForName = limitMaxCharsForName;
     this.dangerousChars = ["<", ">", ".php", ".js"];
@@ -107,5 +109,37 @@ class Validate {
       }
     }
     return true;
+  }
+
+  /**
+   * Verif is string is number
+   *
+   * @param {String} string
+   * @returns {Boolean|null}
+   * @memberof Validate
+   */
+  verifIsNumbers(string) {
+    this.verifNotEmptyOrNullish(string);
+
+    if (this.regexNumber.test(string)) {
+      return true;
+    }
+    return false;
+  }
+
+  /**
+   * Verif is string
+   *
+   * @param {String} string
+   * @returns {Boolean|null}
+   * @memberof Validate
+   */
+  verifIsChars(string) {
+    this.verifNotEmptyOrNullish(string);
+    
+    if (this.regexChar.test(string)) {
+      return true;
+    }
+    return false;
   }
 }
